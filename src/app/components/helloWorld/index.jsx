@@ -4,7 +4,10 @@ import {bindActionCreators}   from 'redux';
 import {connect}              from 'react-redux';
 
 import {getMessage}           from './accessors';
-import {setMessage}           from './actions';
+import {
+  setMessage,
+  getXkcd
+}                             from './actions';
 
 function mapStateToProps (state) {
   return {
@@ -14,15 +17,19 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    setMessage
+    setMessage,
+    getXkcd
   }, dispatch);
 };
 
 
 class HelloWorld extends Component {
-
   onTextChange (event) {
     this.props.setMessage(event.currentTarget.value)
+  }
+
+  onInputBlur () {
+    this.props.getXkcd()
   }
 
   render () {
@@ -30,7 +37,8 @@ class HelloWorld extends Component {
       <div>
         <input
           placeholder='Enter your message'
-          onChange={this.onTextChange.bind(this)} />
+          onChange={this.onTextChange.bind(this)}
+          onBlur={this.onInputBlur.bind(this)} />
         <h1>{this.props.message}</h1>
       </div>
     )

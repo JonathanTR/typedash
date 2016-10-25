@@ -1,8 +1,8 @@
-export const SET_MESSAGE = 'SET_MESSAGE'
+import Types from './types';
 
 export function setMessage(message) {
   return {
-    type: SET_MESSAGE,
+    type: Types.SET_MESSAGE,
     payload: message
   }
-}
+};

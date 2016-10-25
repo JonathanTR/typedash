@@ -1,8 +1,16 @@
-import {createStore, combineReducers} from "redux";
-import helloWorld                     from "./components/helloWorld/reducer"
+import {
+  applyMiddleware,
+  createStore,
+  combineReducers
+}                                     from "redux";
+import thunk                          from "redux-thunk";
 
-const appReducer = combineReducers({
+import helloWorld                     from "./components/helloWorld/reducer";
+
+const app = combineReducers({
   'hello': helloWorld
 })
 
-export default createStore(appReducer);
+let store = applyMiddleware(thunk)(createStore)(app);
+
+export default store
