@@ -15,13 +15,16 @@ var webpackConfig = {
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader?modules!stylus-loader'
       }
     ]
   },
   resolve: {
-
     // For nice filetype resolution, ie import 'components/navbar'.
-    extensions: ["", ".js", ".jsx"],
+    extensions: ["", ".js", ".jsx", ".css", ".styl"],
     root: __dirname,
 
     // God help us if someone has required react somewhere down the

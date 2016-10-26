@@ -5,6 +5,7 @@ import {connect}              from 'react-redux';
 
 import accessors              from './accessors';
 import actions                from './actions';
+import styles                 from './styles';
 
 function mapStateToProps (state) {
   return {
@@ -28,6 +29,7 @@ class Editor extends Component {
     return(
       <div>
         <textarea
+          className={styles.editor}
           onChange={this.onTextChange.bind(this)}
           placeholder='Enter your passage'
           value={this.props.passage}
