@@ -5,42 +5,52 @@ import {connect}              from 'react-redux';
 
 
 class Timer extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
     this.interval = null
+    this.startedAt = null
     this.state = {
-      running: false,
-      startedAt: null,
-      totalSeconds: 5
+      secondsLeft: 0,
+      percentDone: 0
     }
   }
 
-  tick = () => {
-    const secondsElapsed = (Date.now() - this.state.startedAt) / 1000
-    if (secondsElapsed >= this.state.totalSeconds || !this.state.running) {
-      this.stop()
-    }
-    console.log(this.state.totalSeconds)
-    console.log(secondsElapsed)
+
+  timeIsUp () {
+    const { duration } = this.props
+    const secondsElapsed = (Date.now() - this.startedAt) / 1000
+    return secondsElapsed >= this.props.duration
   }
 
-  start = () => {
-    this.setState({running: true, startedAt: Date.now()})
-    this.interval = setInterval(this.tick, 10)
+  tick () {
+    if (this.timeIsUp()) { return this.stop() }
+    const { duration } = this.props
+    const secondsElapsed = (Date.now() - this.startedAt) / 1000
+    this.setState({
+      secondsLeft: duration - secondsElapsed,
+      percentDone: Math.floor(secondsElapsed / duration * 100)
+    })
   }
 
-  stop = () => {
-    this.setState({running: false})
+  start () {
+    this.startedAt = Date.now()
+    this.interval = setInterval(this.tick.bind(this), 10)
+  }
+
+  stop () {
+    this.startedAt = null
+    this.setState({secondsLeft: 0, percentDone: 100})
+    clearInterval((this.interval))
   }
 
   render () {
+    const { secondsLeft, percentDone} = this.state
+    const { children } = this.props
     return (
       <div>
-        <pre>
-          {JSON.stringify(this.state, null, 1)}
-        </pre>
-        <button onClick={this.start}>Start</button>
-        <button onClick={this.stop}>Stop</button>
+        {children(secondsLeft, percentDone)}
+        <button onClick={this.start.bind(this)}>START</button>
+        <button onClick={this.stop.bind(this)}>STOP</button>
       </div>
     )
   }

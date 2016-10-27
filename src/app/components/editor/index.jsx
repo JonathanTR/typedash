@@ -32,6 +32,7 @@ class Editor extends Component {
           className={styles.editor}
           onChange={this.onTextChange.bind(this)}
           placeholder='Enter your passage'
+          style={{opacity: this.props.opacity}}
           value={this.props.passage}
           >
         </textarea>
