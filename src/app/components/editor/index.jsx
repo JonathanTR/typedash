@@ -81,7 +81,7 @@ class Editor extends Component {
             <textarea
               className={styles.editor}
               onChange={this.handleTextChange.bind(this)}
-              placeholder='Enter your passage'
+              placeholder='Type anything to begin your session'
               style={{opacity: percent == 100 ? 1 : (100 - percent) * 0.01}}
               onKeyDown={this.handleKeyDown.bind(this)}
               onKeyUp={this.startDecay.bind(this)}

@@ -4,7 +4,7 @@ import Immutable           from 'immutable';
 import Types from './types';
 
 const initialState = Immutable.fromJS({
-  passage: 'A screaming comes across the sky. It has happened before, but there is nothing to compare it to now.'
+  passage: ''
 });
 
 function editor (state = initialState, action) {

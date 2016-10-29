@@ -66,12 +66,33 @@ class Main extends Component {
             }
           </Timer>
           <label>
-            Minutes
-            <input type='number'
-                   value={sessionDuration / 60}
-                   style={{width: '30px'}}
-                   onChange={(e) => this.setState({sessionDuration: Number(e.target.value * 60)})}>
-            </input>
+            <form onChange={(e) => this.setState({sessionDuration: Number(e.target.value * 60)})}>
+              <label>
+                <input name='duration' type='radio' value={5} />
+                5 minutes
+              </label>
+              <br />
+              <label>
+                <input name='duration' type='radio' value={10} />
+                10 minutes
+              </label>
+              <br />
+              <label>
+                <input name='duration' type='radio' value={15} />
+                15 minutes
+              </label>
+              <br />
+              <label>
+                <input name='duration' type='radio' value={30} />
+                30 minutes
+              </label>
+              <br />
+              <label>
+                <input name='duration' type='radio' value={60} />
+                60 minutes
+              </label>
+              <br />
+            </form>
           </label>
           <button onClick={() => this.setState({sessionCanBeStarted: true})}>START</button>
         </div>
