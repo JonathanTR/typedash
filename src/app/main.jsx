@@ -10,37 +10,51 @@ class Main extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      isCountDownRunning: false
+      decayDuration: 5,
+      isDecaying: false,
+      shouldReset: false
     }
   }
 
   startCountDown () {
-    this.setState({isCountDownRunning: true})
+    this.setState({isDecaying: true})
   }
 
   stopCountDown () {
-    this.setState({isCountDownRunning: false})
+    this.setState({isDecaying: false})
+  }
+
+  triggerShouldReset () {
+    this.setState({shouldReset: true})
+  }
+
+  clearShouldReset () {
+    this.setState({shouldReset: false})
   }
 
   render () {
+    const { decayDuration, isDecaying, shouldReset } = this.state
     return(
       <Provider store={store}>
         <div>
-          <Timer duration={5}
+          <Timer duration={decayDuration}
+                 isRunning={isDecaying}
+                 shouldReset={shouldReset}
+                 onReset={this.clearShouldReset.bind(this)}
                  onStop={this.stopCountDown.bind(this)}
-                 isRunning={this.state.isCountDownRunning}
                  >
             {(seconds, percent) =>
               <div>
                 <pre>
-                  {JSON.stringify({killTimer: {percent, seconds}}, null, 1)}
+                  {JSON.stringify({decayTimer: {percent, seconds}}, null, 1)}
                 </pre>
-                <Editor opacity={(100 - percent) * 0.01} />
+                <Editor life={100 - percent} />
               </div>
             }
           </Timer>
           <button onClick={this.startCountDown.bind(this)}>START</button>
           <button onClick={this.stopCountDown.bind(this)}>STOP</button>
+          <button onClick={this.triggerShouldReset.bind(this)}>RESET</button>
         </div>
       </Provider>
     )

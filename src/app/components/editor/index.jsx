@@ -26,13 +26,14 @@ class Editor extends Component {
   }
 
   render () {
+    const { life } = this.props
     return(
       <div>
         <textarea
           className={styles.editor}
           onChange={this.onTextChange.bind(this)}
           placeholder='Enter your passage'
-          style={{opacity: this.props.opacity}}
+          style={{opacity: life * 0.01}}
           value={this.props.passage}
           >
         </textarea>

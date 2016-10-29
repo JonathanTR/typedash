@@ -26,7 +26,9 @@ class Timer extends Component {
   }
 
   toggleTimerIsOn () {
-    if (this.props.isRunning && !this.state.clockIsRunning) {
+    if (this.props.shouldReset) {
+      this.reset()
+    } else if (this.props.isRunning && !this.state.clockIsRunning) {
       this.setState({clockIsRunning: true})
       this.start()
     } else if (!this.props.isRunning && this.state.clockIsRunning) {
@@ -64,6 +66,7 @@ class Timer extends Component {
   }
 
   reset () {
+    this.props.onReset()
     clearInterval(this.interval)
     this.startedAt = null
     this.setState({
