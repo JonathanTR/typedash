@@ -1,6 +1,7 @@
 import React, {Component}     from 'react';
 import ReactDOM               from 'react-dom';
 
+import styles                 from './styles';
 
 class Clock extends Component {
   unitsFromSeconds (timeInSeconds) {
@@ -24,7 +25,7 @@ class Clock extends Component {
   render () {
     const { hours, seconds, minutes } = this.unitsFromSeconds(this.props.seconds)
     return (
-      <div>
+      <div className={styles.shotClock}>
         {hours ? `${this.padZero(hours)}:` : ''}
         {`${this.padZero(minutes)}`}:
         {`${this.padZero(seconds)}`}
