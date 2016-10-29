@@ -5,6 +5,7 @@ import {Provider}             from 'react-redux';
 import store                  from './store'
 import Editor                 from './components/editor'
 import Timer                  from './components/timer'
+import Clock                  from './components/clock'
 
 class Main extends Component {
   constructor (props) {
