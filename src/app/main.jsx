@@ -7,12 +7,29 @@ import Editor                 from './components/editor'
 import Timer                  from './components/timer'
 
 class Main extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isCountDownRunning: false
+    }
+  }
+
+  startCountDown () {
+    this.setState({isCountDownRunning: true})
+  }
+
+  stopCountDown () {
+    this.setState({isCountDownRunning: false})
+  }
 
   render () {
     return(
       <Provider store={store}>
         <div>
-          <Timer duration={5}>
+          <Timer duration={5}
+                 onStop={this.stopCountDown.bind(this)}
+                 isRunning={this.state.isCountDownRunning}
+                 >
             {(seconds, percent) =>
               <div>
                 <pre>
@@ -22,6 +39,8 @@ class Main extends Component {
               </div>
             }
           </Timer>
+          <button onClick={this.startCountDown.bind(this)}>START</button>
+          <button onClick={this.stopCountDown.bind(this)}>STOP</button>
         </div>
       </Provider>
     )
