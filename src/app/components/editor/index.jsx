@@ -31,8 +31,17 @@ class Editor extends Component {
     }
   }
 
-  onTextChange (event) {
+  handleTextChange (event) {
     this.props.setPassage(event.currentTarget.value)
+  }
+
+  handleKeyDown (event) {
+    const { key } = event
+    const disabledKeys = ['Backspace','ArrowLeft','ArrowRight','ArrowUp','ArrowDown']
+    if (this.props.isDecayable && disabledKeys.includes(key)) {
+      event.preventDefault()
+    }
+    this.resetDecay()
   }
 
   resetDecay () {
@@ -70,10 +79,10 @@ class Editor extends Component {
           {(seconds, percent) =>
             <textarea
               className={styles.editor}
-              onChange={this.onTextChange.bind(this)}
+              onChange={this.handleTextChange.bind(this)}
               placeholder='Enter your passage'
               style={{opacity: percent == 100 ? 1 : (100 - percent) * 0.01}}
-              onKeyDown={this.resetDecay.bind(this)}
+              onKeyDown={this.handleKeyDown.bind(this)}
               onKeyUp={this.startDecay.bind(this)}
               value={this.props.passage}
               >
