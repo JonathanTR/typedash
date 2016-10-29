@@ -52,7 +52,7 @@ class Main extends Component {
     return(
       <Provider store={store}>
         <div>
-          <Timer duration={60}
+          <Timer duration={sessionDuration}
                  isRunning={isInSession}
                  shouldReset={resetSession}
                  onStop={this.handleTimerStop.bind(this)}
@@ -65,6 +65,14 @@ class Main extends Component {
               </div>
             }
           </Timer>
+          <label>
+            Minutes
+            <input type='number'
+                   value={sessionDuration / 60}
+                   style={{width: '30px'}}
+                   onChange={(e) => this.setState({sessionDuration: Number(e.target.value * 60)})}>
+            </input>
+          </label>
           <button onClick={() => this.setState({sessionCanBeStarted: true})}>START</button>
         </div>
       </Provider>
