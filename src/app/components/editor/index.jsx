@@ -25,7 +25,6 @@ class Editor extends Component {
   constructor (props) {
     super()
     this.state = {
-      isDecayable: false,
       decayDuration: 5,
       isDecaying: false,
       resetDecay: false
@@ -36,29 +35,37 @@ class Editor extends Component {
     this.props.setPassage(event.currentTarget.value)
   }
 
-  resetTimer () {
-    this.setState({resetDecay: true, isDecaying: false})
+  resetDecay () {
+    this.setState({
+      resetDecay: true,
+      isDecaying: false
+    })
   }
 
-  startTimer () {
-    if (this.state.isDecayable) {
+  startDecay () {
+    if (this.props.isDecayable) {
       this.setState({isDecaying: true})
     }
   }
 
-  clearPassage () {
-    this.setState({isDecaying: false})
-    this.props.setPassage('')
+  onStopDecayTimer () {
+    if (this.props.isDecayable) {
+      this.setState({isDecaying: false})
+      this.props.setPassage('')
+    } else {
+      this.resetDecay()
+    }
   }
 
   render () {
     const { decayDuration, isDecaying, resetDecay } = this.state
+    const { isDecayable } = this.props
     return (
       <div className={styles.editorContainer}>
         <Timer duration={decayDuration}
-               isRunning={isDecaying}
+               isRunning={ isDecayable ? isDecaying : false}
                shouldReset={resetDecay}
-               onStop={this.clearPassage.bind(this)}
+               onStop={this.onStopDecayTimer.bind(this)}
                onReset={() => this.setState({resetDecay: false})}>
           {(seconds, percent) =>
             <textarea
@@ -66,8 +73,8 @@ class Editor extends Component {
               onChange={this.onTextChange.bind(this)}
               placeholder='Enter your passage'
               style={{opacity: percent == 100 ? 1 : (100 - percent) * 0.01}}
-              onKeyDown={this.resetTimer.bind(this)}
-              onKeyUp={this.startTimer.bind(this)}
+              onKeyDown={this.resetDecay.bind(this)}
+              onKeyUp={this.startDecay.bind(this)}
               value={this.props.passage}
               >
             </textarea>

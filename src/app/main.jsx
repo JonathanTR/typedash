@@ -11,27 +11,31 @@ class Main extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      sessionClock: {
-        sessionDuration: 60,
-        isInSession: false,
-        resetSession: false
-      },
-      decayClock: {
-        decayDuration: 5,
-        isDecaying: false,
-        resetDecay: false
-      }
+      sessionDuration: 60,
+      isInSession: false,
+      resetSession: false
     }
   }
   // Session Timer
-  startSession ()     {this.setState({sessionClock: {isInSession: true}})}
-  stopSession ()      {this.setState({sessionClock: {isInSession: false}})}
-  triggerShouldResetSession () {this.setState({sessionClock: {resetSession: true}})}
-  clearShouldResetSession ()   {this.setState({sessionClock: {resetSession: false}})}
+  startSession () {
+    this.setState({isInSession: true})
+  }
+
+  stopSession () {
+    this.setState({isInSession: false})
+  }
+
+  triggerShouldResetSession () {
+    this.setState({resetSession: true})
+  }
+
+  clearShouldResetSession () {
+    this.setState({resetSession: false})
+  }
+
 
   render () {
-    const { sessionDuration, isInSession, resetSession } = this.state.sessionClock
-    const { decayDuration, isDecaying, resetDecay } = this.state.decayClock
+    const { sessionDuration, isInSession, resetSession } = this.state
     return(
       <Provider store={store}>
         <div>
@@ -42,8 +46,8 @@ class Main extends Component {
                  onReset={this.clearShouldResetSession.bind(this)}>
             {(seconds, percent) =>
               <div>
-                <Clock seconds={seconds} />
-                <Editor />
+                <Clock seconds={sessionDuration - seconds} />
+                <Editor isDecayable={isInSession} />
               </div>
             }
           </Timer>
