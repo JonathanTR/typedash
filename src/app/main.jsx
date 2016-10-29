@@ -11,25 +11,38 @@ class Main extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      sessionCanBeStarted: false,
       sessionDuration: 60,
       isInSession: false,
       resetSession: false
     }
   }
-  // Session Timer
+
   startSession () {
-    this.setState({isInSession: true})
+    const { sessionCanBeStarted } = this.state
+    if (sessionCanBeStarted) {
+      this.setState({isInSession: true})
+    }
   }
 
   stopSession () {
     this.setState({isInSession: false})
   }
 
-  triggerShouldResetSession () {
+  resetSession () {
     this.setState({resetSession: true})
   }
 
-  clearShouldResetSession () {
+  handleTimerStop () {
+    this.stopSession()
+    this.resetSession()
+  }
+
+  // HACK alert. By resetting the timer declaratively, we leave an artifact
+  // behind: our state has this resetSession: true in it. This clears that
+  // variable so we can use it again. There has to be a better way to do this
+  // but I want to keep moving.
+  handleTimerReset () {
     this.setState({resetSession: false})
   }
 
@@ -42,18 +55,17 @@ class Main extends Component {
           <Timer duration={60}
                  isRunning={isInSession}
                  shouldReset={resetSession}
-                 onStop={this.stopSession.bind(this)}
-                 onReset={this.clearShouldResetSession.bind(this)}>
+                 onStop={this.handleTimerStop.bind(this)}
+                 onReset={this.handleTimerReset.bind(this)}>
             {(seconds, percent) =>
               <div>
                 <Clock seconds={sessionDuration - seconds} />
-                <Editor isDecayable={isInSession} />
+                <Editor isDecayable={isInSession}
+                        onBeginEditing={this.startSession.bind(this)} />
               </div>
             }
           </Timer>
-          <button onClick={this.startSession.bind(this)}>START</button>
-          <button onClick={this.stopSession.bind(this)}>STOP</button>
-          <button onClick={this.triggerShouldResetSession.bind(this)}>RESET</button>
+          <button onClick={() => this.setState({sessionCanBeStarted: true})}>START</button>
         </div>
       </Provider>
     )

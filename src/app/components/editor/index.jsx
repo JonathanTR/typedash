@@ -52,6 +52,7 @@ class Editor extends Component {
   }
 
   startDecay () {
+    this.props.onBeginEditing()
     if (this.props.isDecayable) {
       this.setState({isDecaying: true})
     }
