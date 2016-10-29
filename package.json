@@ -5,7 +5,8 @@
   "repository": "https://github.com/JonathanTR/minimal-react-webpack-babel",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "fetch-jsonp": "^1.0.0",
