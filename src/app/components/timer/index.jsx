@@ -10,8 +10,9 @@ class Timer extends Component {
     this.interval = null
     this.startedAt = null
     this.state = {
-      alreadyRunning: false,
-      secondsLeft: 0,
+      clockIsRunning: false,
+      secondsElapsed: 0,
+      savedSeconds: 0,
       percentDone: 0
     }
   }
@@ -25,19 +26,13 @@ class Timer extends Component {
   }
 
   toggleTimerIsOn () {
-    if (this.props.isRunning && !this.state.alreadyRunning) {
-      this.setState({alreadyRunning: true})
+    if (this.props.isRunning && !this.state.clockIsRunning) {
+      this.setState({clockIsRunning: true})
       this.start()
-    } else if (!this.props.isRunning && this.state.alreadyRunning) {
-      this.setState({alreadyRunning: false})
+    } else if (!this.props.isRunning && this.state.clockIsRunning) {
+      this.setState({clockIsRunning: false})
       this.stop()
     }
-  }
-
-  timeIsUp () {
-    const { duration } = this.props
-    const secondsElapsed = (Date.now() - this.startedAt) / 1000
-    return secondsElapsed >= this.props.duration
   }
 
   truncated (number) {
@@ -46,14 +41,13 @@ class Timer extends Component {
 
   tick () {
     const { duration }   = this.props
-    const secondsElapsed = this.truncated((Date.now() - this.startedAt) / 1000)
-    const secondsLeft    = this.truncated(duration - secondsElapsed)
+    const secondsElapsed = this.truncated((Date.now() - this.startedAt) / 1000) + this.state.savedSeconds
     const percentDone    = Math.ceil(secondsElapsed / duration * 100)
-    if (this.timeIsUp()) {
-      this.setState({secondsLeft: 0, percentDone: 100})
+    if (secondsElapsed >= this.props.duration) {
+      this.setState({secondsElapsed: 0, percentDone: 100})
       this.stop()
     } else {
-      this.setState({secondsLeft, percentDone})
+      this.setState({secondsElapsed, percentDone})
     }
   }
 
@@ -66,22 +60,24 @@ class Timer extends Component {
     this.props.onStop()
     clearInterval(this.interval)
     this.startedAt = null
+    this.setState({savedSeconds: this.state.secondsElapsed})
   }
 
   reset () {
     clearInterval(this.interval)
     this.startedAt = null
     this.setState({
-      secondsLeft: this.props.duration,
+      secondsElapsed: 0,
       percentDone: 0,
-      alreadyRunning: false
+      clockIsRunning: false,
+      savedSeconds: 0
     })
   }
 
   render () {
-    const { secondsLeft, percentDone} = this.state
+    const { secondsElapsed, percentDone} = this.state
     const { children } = this.props
-    return children(secondsLeft, percentDone)
+    return children(secondsElapsed, percentDone)
   }
 }
 

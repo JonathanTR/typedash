@@ -33,7 +33,7 @@ class Main extends Component {
             {(seconds, percent) =>
               <div>
                 <pre>
-                  {JSON.stringify({percent, seconds}, null, 1)}
+                  {JSON.stringify({killTimer: {percent, seconds}}, null, 1)}
                 </pre>
                 <Editor opacity={(100 - percent) * 0.01} />
               </div>
