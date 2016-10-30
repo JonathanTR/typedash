@@ -2,17 +2,18 @@ import React, {Component}     from 'react';
 import ReactDOM               from 'react-dom';
 import {Provider}             from 'react-redux';
 
-import store                  from './store'
-import Editor                 from './components/editor'
-import Timer                  from './components/timer'
-import Clock                  from './components/clock'
+import store                  from './store';
+import styles                 from './styles';
+import Editor                 from './components/editor';
+import Timer                  from './components/timer';
+import Clock                  from './components/clock';
 
 class Main extends Component {
   constructor (props) {
     super(props)
     this.state = {
       sessionCanBeStarted: false,
-      sessionDuration: 60,
+      sessionDuration: 120,
       isInSession: false,
       resetSession: false
     }
@@ -46,6 +47,10 @@ class Main extends Component {
     this.setState({resetSession: false})
   }
 
+  handleClickStart (e) {
+    e.preventDefault()
+    this.setState({sessionCanBeStarted: true})
+  }
 
   render () {
     const { sessionDuration, isInSession, resetSession } = this.state
@@ -65,36 +70,24 @@ class Main extends Component {
               </div>
             }
           </Timer>
-          <label>
-            <form onChange={(e) => this.setState({sessionDuration: Number(e.target.value * 60)})}>
-              <label>
-                <input name='duration' type='radio' value={5} />
-                5 minutes
+          <form className={styles.configure}
+                onChange={(e) => this.setState({sessionDuration: Number(e.target.value * 60)})}>
+            {[2,5,10,15,30,60].map((num) =>
+              <label className={`${styles.configure__label} ${num * 60 == sessionDuration ? styles.configure__label_selected : ''}`}
+                     key={num}>
+                <input name='duration'
+                       className={styles.configure__radio}
+                       type='radio'
+                       value={num}>
+                </input>
+                {num}
               </label>
-              <br />
-              <label>
-                <input name='duration' type='radio' value={10} />
-                10 minutes
-              </label>
-              <br />
-              <label>
-                <input name='duration' type='radio' value={15} />
-                15 minutes
-              </label>
-              <br />
-              <label>
-                <input name='duration' type='radio' value={30} />
-                30 minutes
-              </label>
-              <br />
-              <label>
-                <input name='duration' type='radio' value={60} />
-                60 minutes
-              </label>
-              <br />
-            </form>
-          </label>
-          <button onClick={() => this.setState({sessionCanBeStarted: true})}>START</button>
+            )}
+            <button className={styles.configure__start}
+                    onClick={this.handleClickStart.bind(this)}>
+              START
+            </button>
+          </form>
         </div>
       </Provider>
     )
