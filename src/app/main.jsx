@@ -44,7 +44,7 @@ class Main extends Component {
   // variable so we can use it again. There has to be a better way to do this
   // but I want to keep moving.
   handleTimerReset () {
-    this.setState({resetSession: false})
+    this.setState({resetSession: false, sessionCanBeStarted: false})
   }
 
   handleClickStart (e) {
