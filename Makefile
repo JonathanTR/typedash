@@ -5,3 +5,4 @@ publish:
 		npm run build
 		git add . && git commit -m 'Latest build.'
 		git subtree push --prefix build origin gh-pages
+		rm build/bundle.js

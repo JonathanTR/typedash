@@ -165,7 +165,8 @@
 	      var _state = this.state,
 	          sessionDuration = _state.sessionDuration,
 	          isInSession = _state.isInSession,
-	          resetSession = _state.resetSession;
+	          resetSession = _state.resetSession,
+	          sessionCanBeStarted = _state.sessionCanBeStarted;
 
 	      return _react2.default.createElement(
 	        _reactRedux.Provider,
@@ -185,7 +186,7 @@
 	                'div',
 	                null,
 	                _react2.default.createElement(_clock2.default, { seconds: sessionDuration - seconds }),
-	                _react2.default.createElement(_editor2.default, { isDecayable: isInSession,
+	                _react2.default.createElement(_editor2.default, { isDecayable: sessionCanBeStarted,
 	                  onBeginEditing: _this2.startSession.bind(_this2) })
 	              );
 	            }
@@ -27106,7 +27107,7 @@
 	            return _react2.default.createElement('textarea', {
 	              className: _styles2.default.editor,
 	              onChange: _this2.handleTextChange.bind(_this2),
-	              placeholder: 'Type to begin',
+	              placeholder: isDecayable ? 'The session will begin when you start typing' : 'Choose a session length and press "Start"',
 	              style: { opacity: percent == 100 ? 1 : (100 - percent) * 0.01 },
 	              onKeyDown: _this2.handleKeyDown.bind(_this2),
 	              onKeyUp: _this2.startDecay.bind(_this2),
