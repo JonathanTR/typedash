@@ -53,7 +53,7 @@ class Main extends Component {
   }
 
   render () {
-    const { sessionDuration, isInSession, resetSession } = this.state
+    const { sessionDuration, isInSession, resetSession, sessionCanBeStarted } = this.state
     return(
       <Provider store={store}>
         <div>
@@ -65,7 +65,7 @@ class Main extends Component {
             {(seconds, percent) =>
               <div>
                 <Clock seconds={sessionDuration - seconds} />
-                <Editor isDecayable={isInSession}
+                <Editor isDecayable={sessionCanBeStarted}
                         onBeginEditing={this.startSession.bind(this)} />
               </div>
             }
