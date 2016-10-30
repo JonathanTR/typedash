@@ -36,11 +36,6 @@ class Editor extends Component {
   }
 
   handleKeyDown (event) {
-    const { key } = event
-    const disabledKeys = ['Backspace','ArrowLeft','ArrowRight','ArrowUp','ArrowDown']
-    if (this.props.isDecayable && disabledKeys.includes(key)) {
-      event.preventDefault()
-    }
     this.resetDecay()
   }
 
