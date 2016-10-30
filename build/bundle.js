@@ -74,15 +74,19 @@
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _editor = __webpack_require__(189);
+	var _styles = __webpack_require__(189);
+
+	var _styles2 = _interopRequireDefault(_styles);
+
+	var _editor = __webpack_require__(193);
 
 	var _editor2 = _interopRequireDefault(_editor);
 
-	var _timer = __webpack_require__(196);
+	var _timer = __webpack_require__(198);
 
 	var _timer2 = _interopRequireDefault(_timer);
 
-	var _clock = __webpack_require__(197);
+	var _clock = __webpack_require__(199);
 
 	var _clock2 = _interopRequireDefault(_clock);
 
@@ -104,7 +108,7 @@
 
 	    _this.state = {
 	      sessionCanBeStarted: false,
-	      sessionDuration: 60,
+	      sessionDuration: 120,
 	      isInSession: false,
 	      resetSession: false
 	    };
@@ -148,6 +152,12 @@
 	      this.setState({ resetSession: false });
 	    }
 	  }, {
+	    key: 'handleClickStart',
+	    value: function handleClickStart(e) {
+	      e.preventDefault();
+	      this.setState({ sessionCanBeStarted: true });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -181,56 +191,29 @@
 	            }
 	          ),
 	          _react2.default.createElement(
-	            'label',
-	            null,
-	            _react2.default.createElement(
-	              'form',
-	              { onChange: function onChange(e) {
-	                  return _this2.setState({ sessionDuration: Number(e.target.value * 60) });
-	                } },
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                _react2.default.createElement('input', { name: 'duration', type: 'radio', value: 5 }),
-	                '5 minutes'
-	              ),
-	              _react2.default.createElement('br', null),
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                _react2.default.createElement('input', { name: 'duration', type: 'radio', value: 10 }),
-	                '10 minutes'
-	              ),
-	              _react2.default.createElement('br', null),
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                _react2.default.createElement('input', { name: 'duration', type: 'radio', value: 15 }),
-	                '15 minutes'
-	              ),
-	              _react2.default.createElement('br', null),
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                _react2.default.createElement('input', { name: 'duration', type: 'radio', value: 30 }),
-	                '30 minutes'
-	              ),
-	              _react2.default.createElement('br', null),
-	              _react2.default.createElement(
-	                'label',
-	                null,
-	                _react2.default.createElement('input', { name: 'duration', type: 'radio', value: 60 }),
-	                '60 minutes'
-	              ),
-	              _react2.default.createElement('br', null)
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: function onClick() {
-	                return _this2.setState({ sessionCanBeStarted: true });
+	            'form',
+	            { className: _styles2.default.configure,
+	              onChange: function onChange(e) {
+	                return _this2.setState({ sessionDuration: Number(e.target.value * 60) });
 	              } },
-	            'START'
+	            [2, 5, 10, 15, 30, 60].map(function (num) {
+	              return _react2.default.createElement(
+	                'label',
+	                { className: _styles2.default.configure__label + ' ' + (num * 60 == sessionDuration ? _styles2.default.configure__label_selected : ''),
+	                  key: num },
+	                _react2.default.createElement('input', { name: 'duration',
+	                  className: _styles2.default.configure__radio,
+	                  type: 'radio',
+	                  value: num }),
+	                num
+	              );
+	            }),
+	            _react2.default.createElement(
+	              'button',
+	              { className: _styles2.default.configure__start,
+	                onClick: this.handleClickStart.bind(this) },
+	              'START'
+	            )
 	          )
 	        )
 	      );
@@ -26634,225 +26617,20 @@
 /* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(159);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _redux = __webpack_require__(167);
-
-	var _reactRedux = __webpack_require__(160);
-
-	var _accessors = __webpack_require__(190);
-
-	var _accessors2 = _interopRequireDefault(_accessors);
-
-	var _actions = __webpack_require__(191);
-
-	var _actions2 = _interopRequireDefault(_actions);
-
-	var _styles = __webpack_require__(192);
-
-	var _styles2 = _interopRequireDefault(_styles);
-
-	var _timer = __webpack_require__(196);
-
-	var _timer2 = _interopRequireDefault(_timer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	function mapStateToProps(state) {
-	  return {
-	    passage: _accessors2.default.getPassage(state)
-	  };
-	};
-
-	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({
-	    setPassage: _actions2.default.setPassage
-	  }, dispatch);
-	};
-
-	var Editor = function (_Component) {
-	  _inherits(Editor, _Component);
-
-	  function Editor(props) {
-	    _classCallCheck(this, Editor);
-
-	    var _this = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this));
-
-	    _this.state = {
-	      decayDuration: 5,
-	      isDecaying: false,
-	      resetDecay: false
-	    };
-	    return _this;
-	  }
-
-	  _createClass(Editor, [{
-	    key: 'handleTextChange',
-	    value: function handleTextChange(event) {
-	      this.props.setPassage(event.currentTarget.value);
-	    }
-	  }, {
-	    key: 'handleKeyDown',
-	    value: function handleKeyDown(event) {
-	      var key = event.key;
-
-	      var disabledKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
-	      if (this.props.isDecayable && disabledKeys.includes(key)) {
-	        event.preventDefault();
-	      }
-	      this.resetDecay();
-	    }
-	  }, {
-	    key: 'resetDecay',
-	    value: function resetDecay() {
-	      this.setState({
-	        resetDecay: true,
-	        isDecaying: false
-	      });
-	    }
-	  }, {
-	    key: 'startDecay',
-	    value: function startDecay() {
-	      this.props.onBeginEditing();
-	      if (this.props.isDecayable) {
-	        this.setState({ isDecaying: true });
-	      }
-	    }
-	  }, {
-	    key: 'onStopDecayTimer',
-	    value: function onStopDecayTimer() {
-	      if (this.props.isDecayable) {
-	        this.setState({ isDecaying: false });
-	        this.props.setPassage('');
-	      } else {
-	        this.resetDecay();
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-
-	      var _state = this.state,
-	          decayDuration = _state.decayDuration,
-	          isDecaying = _state.isDecaying,
-	          resetDecay = _state.resetDecay;
-	      var isDecayable = this.props.isDecayable;
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: _styles2.default.editorContainer },
-	        _react2.default.createElement(
-	          _timer2.default,
-	          { duration: decayDuration,
-	            isRunning: isDecayable ? isDecaying : false,
-	            shouldReset: resetDecay,
-	            onStop: this.onStopDecayTimer.bind(this),
-	            onReset: function onReset() {
-	              return _this2.setState({ resetDecay: false });
-	            } },
-	          function (seconds, percent) {
-	            return _react2.default.createElement('textarea', {
-	              className: _styles2.default.editor,
-	              onChange: _this2.handleTextChange.bind(_this2),
-	              placeholder: 'Type anything to begin your session',
-	              style: { opacity: percent == 100 ? 1 : (100 - percent) * 0.01 },
-	              onKeyDown: _this2.handleKeyDown.bind(_this2),
-	              onKeyUp: _this2.startDecay.bind(_this2),
-	              value: _this2.props.passage
-	            });
-	          }
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Editor;
-	}(_react.Component);
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Editor);
-
-/***/ },
-/* 190 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	// Accessors allow the shape of the state to be maintained in one place, so you
-	// only have to make updates to one place if the shape of your data changes
-
-	exports.default = {
-	  getPassage: function getPassage(state) {
-	    return state.editor.get('passage');
-	  }
-	};
-
-/***/ },
-/* 191 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _types = __webpack_require__(188);
-
-	var _types2 = _interopRequireDefault(_types);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  setPassage: function setPassage(passage) {
-	    return {
-	      type: _types2.default.SET_PASSAGE,
-	      payload: passage
-	    };
-	  }
-	};
-
-/***/ },
-/* 192 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(193);
+	var content = __webpack_require__(190);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(195)(content, {});
+	var update = __webpack_require__(192)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?modules!./../../../../node_modules/stylus-loader/index.js!./styles.styl", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js?modules!./../../../../node_modules/stylus-loader/index.js!./styles.styl");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js?modules!./../../node_modules/stylus-loader/index.js!./styles.styl", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js?modules!./../../node_modules/stylus-loader/index.js!./styles.styl");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -26862,24 +26640,27 @@
 	}
 
 /***/ },
-/* 193 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(194)();
+	exports = module.exports = __webpack_require__(191)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "._33_fFJQsHjpMf9WagKwwG8 {\n  border: 1px solid #d3d3d3;\n  border-radius: 3px;\n}\n.wfgCMuwjPEJbicfk4hlDZ {\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Cormorant Garamond', serif;\n  font-size: 18px;\n  height: 60vh;\n  outline: none;\n  padding: 20px;\n  resize: none;\n  width: 100%;\n}\n", ""]);
+	exports.push([module.id, "._1RtPw3SvnXEVnr8pyc0kWr {\n  margin: 0 auto;\n  text-align: right;\n  width: 73%;\n}\n._29WcL8mbhssvFNecjOAKfp,\n._3qRJNR4bphr3OAc-CR-anD {\n  background: none;\n  border: 1px solid #d3d3d3;\n  border-top: 0px;\n  border-right: 0px;\n  box-sizing: border-box;\n  color: #696969;\n  display: inline-block;\n  font-family: 'Inconsolata';\n  font-size: 1em;\n  line-height: 30px;\n  padding: 0px;\n  position: relative;\n  text-align: center;\n  vertical-align: middle;\n  width: 30px;\n}\n._29WcL8mbhssvFNecjOAKfp:hover,\n._3qRJNR4bphr3OAc-CR-anD:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n._3PDPFtvuj2HnqPLONHYbr {\n  background: #40e0d0;\n  color: #fff;\n}\n._2TYULoFQg0YyG79OrHOyL9 {\n  display: none;\n}\n._3qRJNR4bphr3OAc-CR-anD {\n  border-right: 1px solid #d3d3d3;\n  width: 70px;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
-		"editorContainer": "_33_fFJQsHjpMf9WagKwwG8",
-		"editor": "wfgCMuwjPEJbicfk4hlDZ"
+		"configure": "_1RtPw3SvnXEVnr8pyc0kWr",
+		"configure__label": "_29WcL8mbhssvFNecjOAKfp",
+		"configure__start": "_3qRJNR4bphr3OAc-CR-anD",
+		"configure__label_selected": "_3PDPFtvuj2HnqPLONHYbr",
+		"configure__radio": "_2TYULoFQg0YyG79OrHOyL9"
 	};
 
 /***/ },
-/* 194 */
+/* 191 */
 /***/ function(module, exports) {
 
 	/*
@@ -26935,7 +26716,7 @@
 
 
 /***/ },
-/* 195 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -27187,7 +26968,255 @@
 
 
 /***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(159);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _redux = __webpack_require__(167);
+
+	var _reactRedux = __webpack_require__(160);
+
+	var _accessors = __webpack_require__(194);
+
+	var _accessors2 = _interopRequireDefault(_accessors);
+
+	var _actions = __webpack_require__(195);
+
+	var _actions2 = _interopRequireDefault(_actions);
+
+	var _styles = __webpack_require__(196);
+
+	var _styles2 = _interopRequireDefault(_styles);
+
+	var _timer = __webpack_require__(198);
+
+	var _timer2 = _interopRequireDefault(_timer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function mapStateToProps(state) {
+	  return {
+	    passage: _accessors2.default.getPassage(state)
+	  };
+	};
+
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({
+	    setPassage: _actions2.default.setPassage
+	  }, dispatch);
+	};
+
+	var Editor = function (_Component) {
+	  _inherits(Editor, _Component);
+
+	  function Editor(props) {
+	    _classCallCheck(this, Editor);
+
+	    var _this = _possibleConstructorReturn(this, (Editor.__proto__ || Object.getPrototypeOf(Editor)).call(this));
+
+	    _this.state = {
+	      decayDuration: 5,
+	      isDecaying: false,
+	      resetDecay: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Editor, [{
+	    key: 'handleTextChange',
+	    value: function handleTextChange(event) {
+	      this.props.setPassage(event.currentTarget.value);
+	    }
+	  }, {
+	    key: 'handleKeyDown',
+	    value: function handleKeyDown(event) {
+	      var key = event.key;
+
+	      var disabledKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+	      if (this.props.isDecayable && disabledKeys.includes(key)) {
+	        event.preventDefault();
+	      }
+	      this.resetDecay();
+	    }
+	  }, {
+	    key: 'resetDecay',
+	    value: function resetDecay() {
+	      this.setState({
+	        resetDecay: true,
+	        isDecaying: false
+	      });
+	    }
+	  }, {
+	    key: 'startDecay',
+	    value: function startDecay() {
+	      this.props.onBeginEditing();
+	      if (this.props.isDecayable) {
+	        this.setState({ isDecaying: true });
+	      }
+	    }
+	  }, {
+	    key: 'onStopDecayTimer',
+	    value: function onStopDecayTimer() {
+	      if (this.props.isDecayable) {
+	        this.setState({ isDecaying: false });
+	        this.props.setPassage('');
+	      } else {
+	        this.resetDecay();
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
+
+	      var _state = this.state,
+	          decayDuration = _state.decayDuration,
+	          isDecaying = _state.isDecaying,
+	          resetDecay = _state.resetDecay;
+	      var isDecayable = this.props.isDecayable;
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: _styles2.default.editorContainer },
+	        _react2.default.createElement(
+	          _timer2.default,
+	          { duration: decayDuration,
+	            isRunning: isDecayable ? isDecaying : false,
+	            shouldReset: resetDecay,
+	            onStop: this.onStopDecayTimer.bind(this),
+	            onReset: function onReset() {
+	              return _this2.setState({ resetDecay: false });
+	            } },
+	          function (seconds, percent) {
+	            return _react2.default.createElement('textarea', {
+	              className: _styles2.default.editor,
+	              onChange: _this2.handleTextChange.bind(_this2),
+	              placeholder: 'Type to begin',
+	              style: { opacity: percent == 100 ? 1 : (100 - percent) * 0.01 },
+	              onKeyDown: _this2.handleKeyDown.bind(_this2),
+	              onKeyUp: _this2.startDecay.bind(_this2),
+	              value: _this2.props.passage
+	            });
+	          }
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Editor;
+	}(_react.Component);
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Editor);
+
+/***/ },
+/* 194 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// Accessors allow the shape of the state to be maintained in one place, so you
+	// only have to make updates to one place if the shape of your data changes
+
+	exports.default = {
+	  getPassage: function getPassage(state) {
+	    return state.editor.get('passage');
+	  }
+	};
+
+/***/ },
+/* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _types = __webpack_require__(188);
+
+	var _types2 = _interopRequireDefault(_types);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	  setPassage: function setPassage(passage) {
+	    return {
+	      type: _types2.default.SET_PASSAGE,
+	      payload: passage
+	    };
+	  }
+	};
+
+/***/ },
 /* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(197);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(192)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?modules!./../../../../node_modules/stylus-loader/index.js!./styles.styl", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?modules!./../../../../node_modules/stylus-loader/index.js!./styles.styl");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(191)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "._33_fFJQsHjpMf9WagKwwG8 {\n  border: 1px solid #d3d3d3;\n  box-sizing: border-box;\n  margin: 0 auto;\n  width: 73%;\n}\n.wfgCMuwjPEJbicfk4hlDZ {\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Cormorant Garamond', serif;\n  font-size: 18px;\n  height: 60vh;\n  outline: none;\n  padding: 20px;\n  resize: none;\n  width: 100%;\n}\n", ""]);
+
+	// exports
+	exports.locals = {
+		"editorContainer": "_33_fFJQsHjpMf9WagKwwG8",
+		"editor": "wfgCMuwjPEJbicfk4hlDZ"
+	};
+
+/***/ },
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27324,7 +27353,7 @@
 	exports.default = Timer;
 
 /***/ },
-/* 197 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27343,7 +27372,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _styles = __webpack_require__(198);
+	var _styles = __webpack_require__(200);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -27411,16 +27440,16 @@
 	exports.default = Clock;
 
 /***/ },
-/* 198 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(199);
+	var content = __webpack_require__(201);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(195)(content, {});
+	var update = __webpack_require__(192)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27437,15 +27466,15 @@
 	}
 
 /***/ },
-/* 199 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(194)();
+	exports = module.exports = __webpack_require__(191)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "._3rd2dECFMKfJt2SXab7iHv {\n  font-family: 'Roboto', sans-serif;\n  text-align: center;\n}\n", ""]);
+	exports.push([module.id, "._3rd2dECFMKfJt2SXab7iHv {\n  color: #696969;\n  font-family: 'Inconsolata', sans-serif;\n  font-size: 18px;\n  text-align: left;\n  margin: 0 auto;\n  padding: 22px;\n  width: 73%;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
