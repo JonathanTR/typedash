@@ -108,7 +108,7 @@
 
 	    _this.state = {
 	      sessionCanBeStarted: false,
-	      sessionDuration: 120,
+	      sessionDuration: 60,
 	      isInSession: false,
 	      resetSession: false
 	    };
@@ -196,7 +196,7 @@
 	              onChange: function onChange(e) {
 	                return _this2.setState({ sessionDuration: Number(e.target.value * 60) });
 	              } },
-	            [2, 5, 10, 15, 30, 60].map(function (num) {
+	            [1, 5, 15, 30].map(function (num) {
 	              return _react2.default.createElement(
 	                'label',
 	                { className: _styles2.default.configure__label + ' ' + (num * 60 == sessionDuration ? _styles2.default.configure__label_selected : ''),
@@ -27051,12 +27051,6 @@
 	  }, {
 	    key: 'handleKeyDown',
 	    value: function handleKeyDown(event) {
-	      var key = event.key;
-
-	      var disabledKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
-	      if (this.props.isDecayable && disabledKeys.includes(key)) {
-	        event.preventDefault();
-	      }
 	      this.resetDecay();
 	    }
 	  }, {
