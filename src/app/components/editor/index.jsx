@@ -59,6 +59,7 @@ class Editor extends Component {
       this.props.setPassage('')
     } else {
       this.resetDecay()
+      this.props.onStop()
     }
   }
 
