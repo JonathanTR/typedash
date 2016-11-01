@@ -79,7 +79,7 @@ class Main extends Component {
           </Timer>
           <form className={styles.configure}
                 onChange={(e) => this.setState({sessionDuration: Number(e.target.value * 60)})}>
-            {[1,5,15,30].map((num) =>
+            {[1,5,15,30,45,60].map((num) =>
               <label className={`${styles.configure__label} ${num * 60 == sessionDuration ? styles.configure__label_selected : ''}`}
                      key={num}>
                 <input name='duration'
