@@ -208,7 +208,7 @@
 	              onChange: function onChange(e) {
 	                return _this2.setState({ sessionDuration: Number(e.target.value * 60) });
 	              } },
-	            [1, 5, 15, 30].map(function (num) {
+	            [1, 5, 15, 30, 45, 60].map(function (num) {
 	              return _react2.default.createElement(
 	                'label',
 	                { className: _styles2.default.configure__label + ' ' + (num * 60 == sessionDuration ? _styles2.default.configure__label_selected : ''),
