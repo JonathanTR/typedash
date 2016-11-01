@@ -14,6 +14,7 @@ class Main extends Component {
     this.state = {
       sessionCanBeStarted: false,
       sessionDuration: 60,
+      wordCountGoal: 20,
       isInSession: false,
       resetSession: false
     }
@@ -65,8 +66,14 @@ class Main extends Component {
             {(seconds, percent) =>
               <div>
                 <Clock seconds={sessionDuration - seconds} />
+                <wordCount className={styles.wordcount}>
+                  {`${this.state.wordCount || 0} of ${this.state.wordCountGoal}`}
+                </wordCount>
                 <Editor isDecayable={sessionCanBeStarted}
-                        onBeginEditing={this.startSession.bind(this)} />
+                        onBeginEditing={this.startSession.bind(this)}
+                        wordCountGoal={this.state.wordCountGoal}
+                        onReachWordCount={this.stopSession.bind(this)}
+                        onEdit={(count) => this.setState({wordCount: count})}/>
               </div>
             }
           </Timer>
