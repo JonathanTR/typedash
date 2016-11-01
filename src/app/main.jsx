@@ -14,7 +14,7 @@ class Main extends Component {
     this.state = {
       sessionCanBeStarted: false,
       sessionDuration: 60,
-      wordCountGoal: 20,
+      wordCountGoal: 417,
       isInSession: false,
       resetSession: false
     }
