@@ -32,7 +32,7 @@ class Editor extends Component {
   }
 
   handleTextChange (event) {
-    const wordCount = event.currentTarget.value.split(/\W/).length
+    const wordCount = event.currentTarget.value.split(/\s/).length
     this.props.setPassage(event.currentTarget.value)
     this.props.onEdit(wordCount)
     if (wordCount == this.props.wordCountGoal) {
