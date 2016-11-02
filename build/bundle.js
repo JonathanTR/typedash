@@ -27059,7 +27059,7 @@
 	  _createClass(Editor, [{
 	    key: 'handleTextChange',
 	    value: function handleTextChange(event) {
-	      var wordCount = event.currentTarget.value.split(/\W/).length;
+	      var wordCount = event.currentTarget.value.split(/\s/).length;
 	      this.props.setPassage(event.currentTarget.value);
 	      this.props.onEdit(wordCount);
 	      if (wordCount == this.props.wordCountGoal) {
