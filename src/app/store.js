@@ -5,10 +5,11 @@ import {
 }                                     from "redux";
 import thunk                          from "redux-thunk";
 
+import main                           from "./reducer";
 import editor                         from "./components/editor/reducer";
 
 const app = combineReducers({
-  editor
+  main, editor
 })
 
 let store = applyMiddleware(thunk)(createStore)(app);

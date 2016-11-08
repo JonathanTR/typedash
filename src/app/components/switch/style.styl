@@ -1,0 +1,35 @@
+$switch__height: 1em
+$switch__width: $switch__height * 1.8
+$switch__knob-size: $switch__height * 0.618
+$switch__knob-margin: ($switch__height - $switch__knob-size) / 2
+$switch__color: dodgerblue
+$switch__color--disabled: lightgray
+$switch__transition: 75ms ease-out
+
+.switch
+  width: $switch__width
+  height: $switch__height
+  display: inline-block
+  border: 1px solid $switch__color--disabled
+  border-radius: $switch__height / 2
+  line-height: $switch__height
+  overflow: hidden
+  transition: background 150ms ease-out
+  &:hover
+    background: $switch__color
+    cursor: pointer
+    border: 1px solid transparent
+    transition: background $switch__transition
+    .switch__knob
+      background: white
+      transition: transform $switch__transition
+      transform: translateY(-50%) translateX($switch__width - $switch__knob-size - $switch__knob-margin)
+.switch__knob
+  height: $switch__knob-size
+  width: $switch__knob-size
+  background: $switch__color--disabled
+  border-radius: 50%
+  position: relative
+  top: 50%
+  transform: translateY(-50%) translateX($switch__knob-margin)
+  transition: transform $switch__transition
