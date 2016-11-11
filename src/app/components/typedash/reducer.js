@@ -4,7 +4,7 @@ import Immutable           from 'immutable';
 import Types from './types';
 
 const initialState = Immutable.fromJS({
-  sessionLength: ''
+  sessionLength: 60
 });
 
 function editor (state = initialState, action) {

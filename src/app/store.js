@@ -5,7 +5,7 @@ import {
 }                                     from "redux";
 import thunk                          from "redux-thunk";
 
-import main                           from "./reducer";
+import main                           from "./components/typedash/reducer";
 import editor                         from "./components/editor/reducer";
 
 const app = combineReducers({
