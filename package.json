@@ -1,8 +1,8 @@
 {
-  "name": "minimal-react-webpack-setup",
+  "name": "typedash",
   "version": "1.0.0",
-  "description": "for very small react/webpack/babel setups",
-  "repository": "https://github.com/JonathanTR/minimal-react-webpack-babel",
+  "description": "An app to get over writer's block.",
+  "repository": "https://github.com/JonathanTR/typedash",
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
