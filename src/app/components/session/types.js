@@ -1,4 +1,4 @@
-const prefix = 'TYPEDASH__'
+const prefix = 'SESSION__'
 
 export default {
   setIsInSession:   prefix + 'SET_IS_IN_SESSION',

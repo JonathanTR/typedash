@@ -25,7 +25,7 @@ function mapDispatchToProps (dispatch) {
   }, dispatch);
 }
 
-class TypeDash extends Component {
+class Session extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -120,4 +120,4 @@ class TypeDash extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeDash)
+export default connect(mapStateToProps, mapDispatchToProps)(Session)

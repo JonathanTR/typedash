@@ -3,13 +3,13 @@ import ReactDOM               from 'react-dom';
 import {Provider}             from 'react-redux';
 
 import store                  from './store';
-import TypeDash               from './components/typedash'
+import Session                from './components/session'
 
 class Main extends Component {
   render () {
     return(
       <Provider store={store}>
-        <TypeDash />
+        <Session />
       </Provider>
     )
   }

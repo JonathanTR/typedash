@@ -8,7 +8,7 @@ const initialState = Immutable.fromJS({
   sessionLength: 60,
 });
 
-const typeDash = (state = initialState, action) => {
+const session = (state = initialState, action) => {
   console.log(action.type, action.payload)
   switch (action.type) {
     case Types.setIsInSession:
@@ -23,4 +23,4 @@ const typeDash = (state = initialState, action) => {
 };
 
 
-export default typeDash
+export default session

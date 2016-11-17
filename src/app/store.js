@@ -5,11 +5,11 @@ import {
 }                                     from "redux";
 import thunk                          from "redux-thunk";
 
-import typedash                       from "./components/typedash/reducer";
+import session                        from "./components/session/reducer";
 import editor                         from "./components/editor/reducer";
 
 const app = combineReducers({
-  typedash,
+  session,
   editor
 })
 
