@@ -7,13 +7,13 @@ const initialState = Immutable.fromJS({
   passage: ''
 });
 
-function editor (state = initialState, action) {
+const editor = (state = initialState, action) => {
   switch (action.type) {
     case Types.SET_PASSAGE:
       return state.set('passage', action.payload)
 
     default:
-      return initialState
+      return state
   }
 };
 

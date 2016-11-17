@@ -1,7 +1,7 @@
 import React, {Component}     from 'react';
 import ReactDOM               from 'react-dom';
 import {bindActionCreators}   from 'redux';
-import {Provider, connect}    from 'react-redux';
+import {connect}              from 'react-redux';
 
 import styles                 from './styles';
 import Editor                 from '../editor';
@@ -13,12 +13,14 @@ import actions                from './actions';
 
 function mapStateToProps (state) {
   return {
+    isInSession: accessors.getIsInSession(state),
     sessionLength: accessors.getSessionLength(state)
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
+    setIsInSession: actions.setIsInSession,
     setSessionLength: actions.setSessionLength
   }, dispatch);
 }
@@ -29,7 +31,6 @@ class TypeDash extends Component {
     this.state = {
       sessionCanBeStarted: false,
       wordCountGoal: 417,
-      isInSession: false,
       resetSession: false
     }
   }
@@ -37,12 +38,12 @@ class TypeDash extends Component {
   startSession () {
     const { sessionCanBeStarted } = this.state
     if (sessionCanBeStarted) {
-      this.setState({isInSession: true})
+      this.props.setIsInSession(true)
     }
   }
 
   stopSession () {
-    this.setState({isInSession: false})
+    this.props.setIsInSession(false)
   }
 
   resetSession () {
@@ -67,10 +68,13 @@ class TypeDash extends Component {
     this.setState({sessionCanBeStarted: true})
   }
 
+  handleChangeSessionLength (e) {
+    this.props.setSessionLength(Number(e.target.value * 60))
+  }
+
   render () {
-    const { isInSession, resetSession, sessionCanBeStarted } = this.state
-    const { sessionLength } = this.props
-    console.log(this.props)
+    const { resetSession, sessionCanBeStarted } = this.state
+    const { sessionLength, isInSession } = this.props
     return(
       <div>
         <Timer duration={sessionLength}
@@ -92,8 +96,9 @@ class TypeDash extends Component {
             </div>
           }
         </Timer>
+
         <form className={styles.configure}
-              onChange={(e) => this.props.setSessionLength(Number(e.target.value * 60))}>
+              onChange={this.handleChangeSessionLength.bind(this)}>
           {[1,5,15,30,45,60].map((num) =>
             <label className={`${styles.configure__label} ${num * 60 == sessionLength ? styles.configure__label_selected : ''}`}
                    key={num}>

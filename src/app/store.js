@@ -5,11 +5,12 @@ import {
 }                                     from "redux";
 import thunk                          from "redux-thunk";
 
-import main                           from "./components/typedash/reducer";
+import typedash                       from "./components/typedash/reducer";
 import editor                         from "./components/editor/reducer";
 
 const app = combineReducers({
-  main, editor
+  typedash,
+  editor
 })
 
 let store = applyMiddleware(thunk)(createStore)(app);

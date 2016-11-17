@@ -1,5 +1,9 @@
 export default {
+  getIsInSession (state) {
+    return state.typedash.get('isInSession')
+  },
+
   getSessionLength (state) {
-    return state.main.get('sessionLength')
+    return state.typedash.get('sessionLength')
   }
 }

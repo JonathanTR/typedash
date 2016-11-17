@@ -4,18 +4,23 @@ import Immutable           from 'immutable';
 import Types from './types';
 
 const initialState = Immutable.fromJS({
-  sessionLength: 60
+  isInSession: false,
+  sessionLength: 60,
 });
 
-function editor (state = initialState, action) {
+const typeDash = (state = initialState, action) => {
+  console.log(action.type, action.payload)
   switch (action.type) {
+    case Types.setIsInSession:
+      return state.set('isInSession', action.payload)
+
     case Types.setSessionLength:
       return state.set('sessionLength', action.payload)
 
     default:
-      return initialState
+      return state
   }
 };
 
 
-export default editor
+export default typeDash
