@@ -14,7 +14,8 @@ import actions                from './actions';
 function mapStateToProps (state) {
   return {
     isInSession: accessors.getIsInSession(state),
-    sessionLength: accessors.getSessionLength(state)
+    sessionLength: accessors.getSessionLength(state),
+    wordCountGoal: accessors.getWordCountGoal(state)
   }
 }
 
@@ -30,7 +31,6 @@ class Session extends Component {
     super(props)
     this.state = {
       sessionCanBeStarted: false,
-      wordCountGoal: 417,
       resetSession: false
     }
   }
@@ -73,8 +73,8 @@ class Session extends Component {
   }
 
   render () {
-    const { resetSession, sessionCanBeStarted } = this.state
-    const { sessionLength, isInSession } = this.props
+    const { resetSession, sessionCanBeStarted, wordcount } = this.state
+    const { sessionLength, isInSession, wordCountGoal } = this.props
     return(
       <div>
         <Timer duration={sessionLength}
@@ -86,11 +86,11 @@ class Session extends Component {
             <div>
               <Clock seconds={sessionLength - seconds} />
               <wordCount className={styles.wordcount}>
-                {`${this.state.wordCount || 0} of ${this.state.wordCountGoal}`}
+                {`${wordcount || 0} of ${wordCountGoal}`}
               </wordCount>
               <Editor isDecayable={sessionCanBeStarted}
                       onBeginEditing={this.startSession.bind(this)}
-                      wordCountGoal={this.state.wordCountGoal}
+                      wordCountGoal={this.props.wordCountGoal}
                       onReachWordCount={this.stopSession.bind(this)}
                       onEdit={(count) => this.setState({wordCount: count})}/>
             </div>

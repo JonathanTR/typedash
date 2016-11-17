@@ -6,6 +6,7 @@ import Types from './types';
 const initialState = Immutable.fromJS({
   isInSession: false,
   sessionLength: 60,
+  wordCountGoal: 100,
 });
 
 const session = (state = initialState, action) => {

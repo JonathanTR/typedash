@@ -5,5 +5,9 @@ export default {
 
   getSessionLength (state) {
     return state.session.get('sessionLength')
-  }
+  },
+
+  getWordCountGoal (state) {
+    return state.session.get('wordCountGoal')
+  },
 }
