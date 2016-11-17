@@ -22,7 +22,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
     setIsInSession: actions.setIsInSession,
-    setSessionLength: actions.setSessionLength
+    setSessionLength: actions.setSessionLength,
+    setWordCountGoal: actions.setWordCountGoal,
   }, dispatch);
 }
 
@@ -72,6 +73,10 @@ class Session extends Component {
     this.props.setSessionLength(Number(e.target.value * 60))
   }
 
+  handleWordCountGoalChange (e) {
+    this.props.setWordCountGoal(Number(e.target.value))
+  }
+
   render () {
     const { resetSession, sessionCanBeStarted, wordcount } = this.state
     const { sessionLength, isInSession, wordCountGoal } = this.props
@@ -110,11 +115,15 @@ class Session extends Component {
               {num}
             </label>
           )}
-          <button className={styles.configure__start}
-                  onClick={this.handleClickStart.bind(this)}>
-            START
-          </button>
         </form>
+        <input name='wordCountGoal'
+               value={wordCountGoal}
+               onChange={this.handleWordCountGoalChange.bind(this)}>
+        </input>
+        <button className={styles.configure__start}
+                onClick={this.handleClickStart.bind(this)}>
+          START
+        </button>
       </div>
     )
   }

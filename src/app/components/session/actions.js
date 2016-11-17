@@ -14,4 +14,11 @@ export default {
       payload: length
     }
   },
+
+  setWordCountGoal(wordCount) {
+    return {
+      type: Types.setWordCountGoal,
+      payload: wordCount
+    }
+  },
 };

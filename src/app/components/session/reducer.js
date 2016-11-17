@@ -10,13 +10,15 @@ const initialState = Immutable.fromJS({
 });
 
 const session = (state = initialState, action) => {
-  console.log(action.type, action.payload)
   switch (action.type) {
     case Types.setIsInSession:
       return state.set('isInSession', action.payload)
 
     case Types.setSessionLength:
       return state.set('sessionLength', action.payload)
+
+    case Types.setWordCountGoal:
+      return state.set('wordCountGoal', action.payload)
 
     default:
       return state
