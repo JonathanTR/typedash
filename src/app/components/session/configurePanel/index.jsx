@@ -7,6 +7,8 @@ import accessors              from '../accessors';
 import actions                from '../actions';
 import styles                 from './styles';
 
+import editorActions          from '../../editor/actions';
+
 function mapStateToProps (state) {
   return {
     sessionLength: accessors.getSessionLength(state),
@@ -19,11 +21,13 @@ function mapDispatchToProps (dispatch) {
     setIsEnabled:     actions.setIsEnabled,
     setSessionLength: actions.setSessionLength,
     setWordCountGoal: actions.setWordCountGoal,
+    setFadeDuration:  editorActions.setFadeDuration,
   }, dispatch);
 }
 
 
 const SESSION_OPTIONS = [1, 5, 15, 30, 45]
+const FADE_OPTIONS = [2, 5, 10]
 
 class ConfigurePanel extends Component {
 
@@ -33,6 +37,10 @@ class ConfigurePanel extends Component {
 
   handleWordCountGoalChange (e) {
     this.props.setWordCountGoal(Number(e.target.value))
+  }
+
+  handleFadeTimerChange (e) {
+    this.props.setFadeDuration(e.target.value)
   }
 
   handleClickStart (e) {
@@ -74,6 +82,25 @@ class ConfigurePanel extends Component {
             </label>
           )}
         </div>
+
+        <div className={styles.configurePanel__option}>
+         <label className={styles.configurePanel__label}>
+            fade timer
+          </label>
+          <br/>
+          {FADE_OPTIONS.map((num) =>
+            <label key={num}>
+              <input onChange={this.handleFadeTimerChange.bind(this)}
+                     className={styles.sessionLengthOption}
+                     name='fadeTimer'
+                     type='radio'
+                     value={num}>
+              </input>
+              {num}
+            </label>
+          )}
+        </div>
+
         <button className={styles.configurePanel__button}
                 onClick={this.handleClickStart.bind(this)}>
           START

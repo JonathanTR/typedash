@@ -4,11 +4,15 @@ import Immutable           from 'immutable';
 import Types from './types';
 
 const initialState = Immutable.fromJS({
-  passage: ''
+  passage: '',
+  fadeDuration: 5,
 });
 
 const editor = (state = initialState, action) => {
   switch (action.type) {
+    case Types.SET_FADE_DURATION:
+      return state.set('fadeDuration', action.payload)
+
     case Types.SET_PASSAGE:
       return state.set('passage', action.payload)
 

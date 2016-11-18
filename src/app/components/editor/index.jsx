@@ -10,7 +10,8 @@ import Timer                  from '../timer'
 
 function mapStateToProps (state) {
   return {
-    passage: accessors.getPassage(state)
+    fadeDuration: accessors.getFadeDuration(state),
+    passage: accessors.getPassage(state),
   }
 };
 
@@ -25,7 +26,6 @@ class Editor extends Component {
   constructor (props) {
     super()
     this.state = {
-      decayDuration: 5,
       isDecaying: false,
       resetDecay: false
     }
@@ -70,11 +70,11 @@ class Editor extends Component {
   }
 
   render () {
-    const { decayDuration, isDecaying, resetDecay } = this.state
-    const { isDecayable } = this.props
+    const { isDecaying, resetDecay } = this.state
+    const { fadeDuration, isDecayable } = this.props
     return (
       <div className={styles.editorContainer}>
-        <Timer duration={decayDuration}
+        <Timer duration={fadeDuration}
                isRunning={ isDecayable ? isDecaying : false}
                shouldReset={resetDecay}
                onStop={this.onStopDecayTimer.bind(this)}
