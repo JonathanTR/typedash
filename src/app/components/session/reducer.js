@@ -4,6 +4,7 @@ import Immutable           from 'immutable';
 import Types from './types';
 
 const initialState = Immutable.fromJS({
+  isEnabled: false,
   isInSession: false,
   sessionLength: 60,
   wordCountGoal: 100,
@@ -11,6 +12,9 @@ const initialState = Immutable.fromJS({
 
 const session = (state = initialState, action) => {
   switch (action.type) {
+    case Types.setIsEnabled:
+      return state.set('isEnabled', action.payload)
+
     case Types.setIsInSession:
       return state.set('isInSession', action.payload)
 

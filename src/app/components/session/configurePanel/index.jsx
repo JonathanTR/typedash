@@ -15,6 +15,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
+    setIsEnabled:     actions.setIsEnabled,
     setSessionLength: actions.setSessionLength,
     setWordCountGoal: actions.setWordCountGoal,
   }, dispatch);
@@ -28,6 +29,11 @@ class ConfigurePanel extends Component {
 
   handleWordCountGoalChange (e) {
     this.props.setWordCountGoal(Number(e.target.value))
+  }
+
+  handleClickStart (e) {
+    e.preventDefault()
+    this.props.setIsEnabled(true)
   }
 
   render () {
@@ -49,6 +55,9 @@ class ConfigurePanel extends Component {
                value={wordCountGoal}
                onChange={this.handleWordCountGoalChange.bind(this)}>
         </input>
+        <button onClick={this.handleClickStart.bind(this)}>
+          START
+        </button>
       </div>
     )
   }

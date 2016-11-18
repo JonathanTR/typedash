@@ -1,4 +1,8 @@
 export default {
+  getIsEnabled (state) {
+    return state.session.get('isEnabled')
+  },
+
   getIsInSession (state) {
     return state.session.get('isInSession')
   },

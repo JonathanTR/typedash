@@ -1,6 +1,13 @@
 import Types from './types';
 
 export default {
+  setIsEnabled(bool) {
+    return {
+      type: Types.setIsEnabled,
+      payload: bool
+    }
+  },
+
   setIsInSession(bool) {
     return {
       type: Types.setIsInSession,

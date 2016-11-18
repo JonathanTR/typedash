@@ -14,7 +14,8 @@ import actions                from './actions';
 
 function mapStateToProps (state) {
   return {
-    isInSession: accessors.getIsInSession(state),
+    isEnabled:     accessors.getIsEnabled(state),
+    isInSession:   accessors.getIsInSession(state),
     sessionLength: accessors.getSessionLength(state),
     wordCountGoal: accessors.getWordCountGoal(state)
   }
@@ -22,7 +23,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    setIsInSession: actions.setIsInSession,
+    setIsEnabled:     actions.setIsEnabled,
+    setIsInSession:   actions.setIsInSession,
     setSessionLength: actions.setSessionLength,
     setWordCountGoal: actions.setWordCountGoal,
   }, dispatch);
@@ -32,14 +34,13 @@ class Session extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      sessionCanBeStarted: false,
       resetSession: false
     }
   }
 
   startSession () {
-    const { sessionCanBeStarted } = this.state
-    if (sessionCanBeStarted) {
+    const { isEnabled } = this.props
+    if (isEnabled) {
       this.props.setIsInSession(true)
     }
   }
@@ -62,13 +63,10 @@ class Session extends Component {
   // variable so we can use it again. There has to be a better way to do this
   // but I want to keep moving.
   handleTimerReset () {
-    this.setState({resetSession: false, sessionCanBeStarted: false})
+    this.setState({resetSession: false})
+    this.props.setIsEnabled(false)
   }
 
-  handleClickStart (e) {
-    e.preventDefault()
-    this.setState({sessionCanBeStarted: true})
-  }
 
   handleWordCountChange (count) {
     this.setState({wordcount: count})
@@ -76,10 +74,11 @@ class Session extends Component {
 
 
   render () {
-    const { resetSession, sessionCanBeStarted, wordcount } = this.state
-    const { sessionLength, isInSession, wordCountGoal } = this.props
+    const { resetSession, wordcount } = this.state
+    const { isEnabled, sessionLength, isInSession, wordCountGoal } = this.props
     return(
       <div>
+        <ConfigurePanel />
         <Timer duration={sessionLength}
                isRunning={isInSession}
                shouldReset={resetSession}
@@ -91,7 +90,7 @@ class Session extends Component {
               <wordCount className={styles.wordcount}>
                 {`${wordcount || 0} of ${wordCountGoal}`}
               </wordCount>
-              <Editor isDecayable={sessionCanBeStarted}
+              <Editor isDecayable={isEnabled}
                       onBeginEditing={this.startSession.bind(this)}
                       wordCountGoal={this.props.wordCountGoal}
                       onReachWordCount={this.stopSession.bind(this)}
@@ -100,10 +99,6 @@ class Session extends Component {
             </div>
           }
         </Timer>
-        <ConfigurePanel />
-        <button onClick={this.handleClickStart.bind(this)}>
-          START
-        </button>
       </div>
     )
   }
