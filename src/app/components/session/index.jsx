@@ -70,13 +70,10 @@ class Session extends Component {
     this.setState({sessionCanBeStarted: true})
   }
 
-  handleChangeSessionLength (e) {
-    this.props.setSessionLength(Number(e.target.value * 60))
+  handleWordCountChange (count) {
+    this.setState({wordcount: count})
   }
 
-  handleWordCountGoalChange (e) {
-    this.props.setWordCountGoal(Number(e.target.value))
-  }
 
   render () {
     const { resetSession, sessionCanBeStarted, wordcount } = this.state
