@@ -73,6 +73,12 @@ class Editor extends Component {
     }
   }
 
+  handleCutCopy (e) {
+    if (this.props.isDecayable) {
+      e.preventDefault()
+    }
+  }
+
   render () {
     const { isDecaying, resetDecay } = this.state
     const { fadeDuration, isDecayable } = this.props
@@ -87,6 +93,8 @@ class Editor extends Component {
             <textarea
               className={styles.editor}
               onChange={this.handleTextChange.bind(this)}
+              onCut={this.handleCutCopy.bind(this)}
+              onCopy={this.handleCutCopy.bind(this)}
               placeholder={isDecayable ? 'The session will begin when you start typing' : 'Choose a session length and press "Start"'}
               style={{opacity: percent == 100 ? 1 : (100 - percent) * 0.01}}
               onKeyDown={this.handleKeyDown.bind(this)}
