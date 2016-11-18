@@ -73,15 +73,15 @@ class ConfigurePanel extends Component {
           </label>
           <br/>
           {SESSION_OPTIONS.map((num) =>
-            <label key={num}>
+            <label key={num} className={styles.sessionLengthOption}>
               <input onChange={this.handleChangeSessionLength.bind(this)}
-                     className={styles.sessionLengthOption}
                      checked={num == (sessionLength / 60) ? 'checked' : ''}
+                     style={{cursor: 'pointer'}}
                      name='duration'
                      type='radio'
                      value={num}>
               </input>
-              {num}
+              {num}m
             </label>
           )}
         </div>
@@ -92,15 +92,15 @@ class ConfigurePanel extends Component {
           </label>
           <br/>
           {FADE_OPTIONS.map((num) =>
-            <label key={num}>
+            <label key={num} className={styles.sessionLengthOption}>
               <input onChange={this.handleFadeTimerChange.bind(this)}
-                     className={styles.sessionLengthOption}
                      checked={num == fadeDuration ? 'checked' : ''}
+                     style={{cursor: 'pointer'}}
                      name='fadeTimer'
                      type='radio'
                      value={num}>
               </input>
-              {num}
+              {num}s
             </label>
           )}
         </div>
