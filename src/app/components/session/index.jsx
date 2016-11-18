@@ -7,6 +7,7 @@ import styles                 from './styles';
 import Editor                 from '../editor';
 import Timer                  from '../timer';
 import Clock                  from '../clock';
+import ConfigurePanel         from './configurePanel';
 
 import accessors              from './accessors';
 import actions                from './actions';
@@ -97,31 +98,13 @@ class Session extends Component {
                       onBeginEditing={this.startSession.bind(this)}
                       wordCountGoal={this.props.wordCountGoal}
                       onReachWordCount={this.stopSession.bind(this)}
-                      onEdit={(count) => this.setState({wordCount: count})}/>
+                      onEdit={this.handleWordCountChange.bind(this)}>
+              </Editor>
             </div>
           }
         </Timer>
-
-        <form className={styles.configure}
-              onChange={this.handleChangeSessionLength.bind(this)}>
-          {[1,5,15,30,45,60].map((num) =>
-            <label className={`${styles.configure__label} ${num * 60 == sessionLength ? styles.configure__label_selected : ''}`}
-                   key={num}>
-              <input name='duration'
-                     className={styles.configure__radio}
-                     type='radio'
-                     value={num}>
-              </input>
-              {num}
-            </label>
-          )}
-        </form>
-        <input name='wordCountGoal'
-               value={wordCountGoal}
-               onChange={this.handleWordCountGoalChange.bind(this)}>
-        </input>
-        <button className={styles.configure__start}
-                onClick={this.handleClickStart.bind(this)}>
+        <ConfigurePanel />
+        <button onClick={this.handleClickStart.bind(this)}>
           START
         </button>
       </div>
