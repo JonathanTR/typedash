@@ -6,7 +6,7 @@ import {connect}              from 'react-redux';
 import styles                 from './styles';
 import Editor                 from '../editor';
 import Timer                  from '../timer';
-import Clock                  from '../clock';
+import Clock                  from './clock';
 import ConfigurePanel         from './configurePanel';
 
 import accessors              from './accessors';
