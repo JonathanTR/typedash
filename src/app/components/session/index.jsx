@@ -2,6 +2,7 @@ import React, {Component}     from 'react';
 import ReactDOM               from 'react-dom';
 import {bindActionCreators}   from 'redux';
 import {connect}              from 'react-redux';
+import {Motion, spring}       from 'react-motion';
 
 import styles                 from './styles';
 import Editor                 from '../editor';
@@ -76,9 +77,17 @@ class Session extends Component {
   render () {
     const { resetSession, wordcount } = this.state
     const { isEnabled, sessionLength, isInSession, wordCountGoal } = this.props
+    const targetHeight = isEnabled ? 3 : 38
+    const targetStyle = {height:  spring(targetHeight,  {stiffness: 300, damping: 30})}
     return(
       <div>
-        <ConfigurePanel />
+        <Motion style={targetStyle}>
+          {(style) =>
+            <div style={{height: `${style.height}vh`, overflow: 'hidden'}}>
+              <ConfigurePanel />
+            </div>
+          }
+        </Motion>
         <Timer duration={sessionLength}
                isRunning={isInSession}
                shouldReset={resetSession}
