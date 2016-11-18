@@ -86,16 +86,18 @@ class Session extends Component {
                onReset={this.handleTimerReset.bind(this)}>
           {(seconds, percent) =>
             <div>
-              <Clock seconds={sessionLength - seconds} />
-              <wordCount className={styles.wordcount}>
-                {`${wordcount || 0} of ${wordCountGoal}`}
-              </wordCount>
               <Editor isDecayable={isEnabled}
                       onBeginEditing={this.startSession.bind(this)}
                       wordCountGoal={this.props.wordCountGoal}
                       onReachWordCount={this.stopSession.bind(this)}
                       onEdit={this.handleWordCountChange.bind(this)}>
               </Editor>
+              <div className={styles.indicators}>
+                <wordCount className={styles.wordcount}>
+                  {`${wordcount || 0} of ${wordCountGoal} words`}
+                </wordCount>
+                <Clock seconds={sessionLength - seconds} />
+              </div>
             </div>
           }
         </Timer>

@@ -5,6 +5,7 @@ import {connect}              from 'react-redux';
 
 import accessors              from '../accessors';
 import actions                from '../actions';
+import styles                 from './styles';
 
 function mapStateToProps (state) {
   return {
@@ -20,6 +21,9 @@ function mapDispatchToProps (dispatch) {
     setWordCountGoal: actions.setWordCountGoal,
   }, dispatch);
 }
+
+
+const SESSION_OPTIONS = [1, 5, 15, 30, 45]
 
 class ConfigurePanel extends Component {
 
@@ -39,26 +43,42 @@ class ConfigurePanel extends Component {
   render () {
     const { sessionLength, isInSession, wordCountGoal } = this.props
     return (
-      <div>
-        <form onChange={this.handleChangeSessionLength.bind(this)}>
-          {[1,5,15,30,45,60].map((num) =>
+      <form className={styles.configurePanel}>
+        <div className={styles.configurePanel__option}>
+          <label className={styles.configurePanel__label}>
+            target word count
+          </label>
+          <br/>
+          <input type='number'
+                 className={styles.wordCountGoalInput}
+                 name='wordCountGoal'
+                 value={wordCountGoal}
+                 onChange={this.handleWordCountGoalChange.bind(this)}>
+          </input>
+        </div>
+
+        <div className={styles.configurePanel__option}>
+          <label className={styles.configurePanel__label}>
+            session length
+          </label>
+          <br/>
+          {SESSION_OPTIONS.map((num) =>
             <label key={num}>
-              <input name='duration'
+              <input onChange={this.handleChangeSessionLength.bind(this)}
+                     className={styles.sessionLengthOption}
+                     name='duration'
                      type='radio'
                      value={num}>
               </input>
               {num}
             </label>
           )}
-        </form>
-        <input name='wordCountGoal'
-               value={wordCountGoal}
-               onChange={this.handleWordCountGoalChange.bind(this)}>
-        </input>
-        <button onClick={this.handleClickStart.bind(this)}>
+        </div>
+        <button className={styles.configurePanel__button}
+                onClick={this.handleClickStart.bind(this)}>
           START
         </button>
-      </div>
+      </form>
     )
   }
 }
