@@ -28558,7 +28558,7 @@
 	          isInSession = _props.isInSession,
 	          wordCountGoal = _props.wordCountGoal;
 
-	      var targetHeight = isEnabled ? 3 : 38;
+	      var targetHeight = isEnabled ? 3 : 40;
 	      var targetStyle = { height: (0, _reactMotion.spring)(targetHeight, { stiffness: 300, damping: 30 }) };
 	      return _react2.default.createElement(
 	        'div',
@@ -30696,7 +30696,7 @@
 
 
 	// module
-	exports.push([module.id, "._33_fFJQsHjpMf9WagKwwG8 {\n  border: 1px solid #d3d3d3;\n  box-sizing: border-box;\n  margin: 0 auto;\n}\n.wfgCMuwjPEJbicfk4hlDZ {\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Cormorant Garamond', serif;\n  font-size: 18px;\n  height: 59vh;\n  outline: none;\n  padding: 20px;\n  resize: none;\n  width: 100%;\n  vertical-align: top;\n}\n", ""]);
+	exports.push([module.id, "._33_fFJQsHjpMf9WagKwwG8 {\n  border: 1px solid #d3d3d3;\n  box-sizing: border-box;\n  margin: 0 auto;\n}\n.wfgCMuwjPEJbicfk4hlDZ {\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Cormorant Garamond', serif;\n  font-size: 18px;\n  height: 65vh;\n  outline: none;\n  padding: 20px;\n  resize: none;\n  width: 100%;\n  vertical-align: top;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
@@ -31114,14 +31114,15 @@
 	          SESSION_OPTIONS.map(function (num) {
 	            return _react2.default.createElement(
 	              'label',
-	              { key: num },
+	              { key: num, className: _styles2.default.sessionLengthOption },
 	              _react2.default.createElement('input', { onChange: _this2.handleChangeSessionLength.bind(_this2),
-	                className: _styles2.default.sessionLengthOption,
 	                checked: num == sessionLength / 60 ? 'checked' : '',
+	                style: { cursor: 'pointer' },
 	                name: 'duration',
 	                type: 'radio',
 	                value: num }),
-	              num
+	              num,
+	              'm'
 	            );
 	          })
 	        ),
@@ -31137,14 +31138,15 @@
 	          FADE_OPTIONS.map(function (num) {
 	            return _react2.default.createElement(
 	              'label',
-	              { key: num },
+	              { key: num, className: _styles2.default.sessionLengthOption },
 	              _react2.default.createElement('input', { onChange: _this2.handleFadeTimerChange.bind(_this2),
-	                className: _styles2.default.sessionLengthOption,
 	                checked: num == fadeDuration ? 'checked' : '',
+	                style: { cursor: 'pointer' },
 	                name: 'fadeTimer',
 	                type: 'radio',
 	                value: num }),
-	              num
+	              num,
+	              's'
 	            );
 	          })
 	        ),
@@ -31222,7 +31224,7 @@
 
 
 	// module
-	exports.push([module.id, "._3gFe60BmPs5FwBwdw6eQyx {\n  box-sizing: border-box;\n  font-family: 'Inconsolata', monospace;\n  padding: 20px;\n  text-align: center;\n}\n.sDtfRdeBtnHhW3YMGgJiW {\n  display: block;\n  margin-bottom: 16px;\n  text-align: center;\n}\n._-8J-oYlimoxe3U0C2AJ4Q {\n  display: inline-block;\n  margin-bottom: 6px;\n}\n.voPLWGy_G98-IoSuGCthp {\n  background: none;\n  border: none;\n  font-family: 'Inconsolata', monospace;\n  font-size: 1em;\n  outline: none;\n}\n.voPLWGy_G98-IoSuGCthp:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n.IEKF04wzYUgK3r5fekZEE {\n  color: #00f;\n  display: inline-block;\n}\n._3Oo-WJ35MkxeqmhMvK2l-8 {\n  background: #f0fff0;\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Inconsolata', monospace;\n  font-size: 1em;\n  line-height: 1.2em;\n  outline: none;\n  width: 40px;\n  text-align: center;\n}\n._3Oo-WJ35MkxeqmhMvK2l-8::-webkit-inner-spin-button,\n._3Oo-WJ35MkxeqmhMvK2l-8::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n", ""]);
+	exports.push([module.id, "._3gFe60BmPs5FwBwdw6eQyx {\n  box-sizing: border-box;\n  font-family: 'Inconsolata', monospace;\n  padding: 20px;\n  text-align: center;\n}\n.sDtfRdeBtnHhW3YMGgJiW {\n  display: block;\n  margin-bottom: 18px;\n  text-align: center;\n}\n._-8J-oYlimoxe3U0C2AJ4Q {\n  display: inline-block;\n  margin-bottom: 10px;\n  text-decoration: underline;\n}\n.voPLWGy_G98-IoSuGCthp {\n  background: none;\n  border: none;\n  font-family: 'Inconsolata', monospace;\n  font-size: 1em;\n  outline: none;\n}\n.voPLWGy_G98-IoSuGCthp:hover {\n  cursor: pointer;\n  text-decoration: underline;\n}\n.IEKF04wzYUgK3r5fekZEE {\n  cursor: pointer;\n  display: inline-block;\n  margin: 0px 8px;\n}\n._3Oo-WJ35MkxeqmhMvK2l-8 {\n  background: #f0fff0;\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Inconsolata', monospace;\n  font-size: 1em;\n  line-height: 1.2em;\n  outline: none;\n  width: 40px;\n  text-align: center;\n}\n._3Oo-WJ35MkxeqmhMvK2l-8::-webkit-inner-spin-button,\n._3Oo-WJ35MkxeqmhMvK2l-8::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
