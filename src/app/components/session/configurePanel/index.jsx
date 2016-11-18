@@ -8,11 +8,13 @@ import actions                from '../actions';
 import styles                 from './styles';
 
 import editorActions          from '../../editor/actions';
+import editorAccessors        from '../../editor/accessors';
 
 function mapStateToProps (state) {
   return {
     sessionLength: accessors.getSessionLength(state),
-    wordCountGoal: accessors.getWordCountGoal(state)
+    wordCountGoal: accessors.getWordCountGoal(state),
+    fadeDuration:  editorAccessors.getFadeDuration(state),
   }
 }
 
@@ -49,7 +51,7 @@ class ConfigurePanel extends Component {
   }
 
   render () {
-    const { sessionLength, isInSession, wordCountGoal } = this.props
+    const { sessionLength, isInSession, wordCountGoal, fadeDuration } = this.props
     return (
       <form className={styles.configurePanel}>
         <div className={styles.configurePanel__option}>
@@ -74,6 +76,7 @@ class ConfigurePanel extends Component {
             <label key={num}>
               <input onChange={this.handleChangeSessionLength.bind(this)}
                      className={styles.sessionLengthOption}
+                     checked={num == (sessionLength / 60) ? 'checked' : ''}
                      name='duration'
                      type='radio'
                      value={num}>
@@ -92,6 +95,7 @@ class ConfigurePanel extends Component {
             <label key={num}>
               <input onChange={this.handleFadeTimerChange.bind(this)}
                      className={styles.sessionLengthOption}
+                     checked={num == fadeDuration ? 'checked' : ''}
                      name='fadeTimer'
                      type='radio'
                      value={num}>
