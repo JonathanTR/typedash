@@ -23319,7 +23319,7 @@
 	var initialState = _immutable2.default.fromJS({
 	  isEnabled: false,
 	  isInSession: false,
-	  sessionLength: 60,
+	  sessionLength: 300,
 	  wordCountGoal: 100
 	});
 
@@ -30592,7 +30592,7 @@
 	              onChange: _this2.handleTextChange.bind(_this2),
 	              onCut: _this2.handleCutCopy.bind(_this2),
 	              onCopy: _this2.handleCutCopy.bind(_this2),
-	              placeholder: isDecayable ? 'The session will begin when you start typing' : 'Choose a session length and press "Start"',
+	              placeholder: isDecayable ? 'The session will begin when you start typing' : 'Choose a target word count, session length, and fade timer. Then press "Start"',
 	              style: { opacity: percent == 100 ? 1 : (100 - percent) * 0.01 },
 	              onKeyDown: _this2.handleKeyDown.bind(_this2),
 	              onKeyUp: _this2.startDecay.bind(_this2),
