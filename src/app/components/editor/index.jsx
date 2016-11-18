@@ -8,6 +8,8 @@ import actions                from './actions';
 import styles                 from './styles';
 import Timer                  from '../timer'
 
+import sessionActions         from '../session/actions';
+
 function mapStateToProps (state) {
   return {
     fadeDuration: accessors.getFadeDuration(state),
@@ -17,7 +19,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return bindActionCreators({
-    setPassage: actions.setPassage
+    setPassage: actions.setPassage,
+    setIsInSession: sessionActions.setIsInSession,
   }, dispatch);
 };
 
@@ -63,6 +66,7 @@ class Editor extends Component {
     if (this.props.isDecayable) {
       this.setState({isDecaying: false})
       this.props.setPassage('')
+      this.props.setIsInSession(false)
     } else {
       this.resetDecay()
       this.props.onStop()
