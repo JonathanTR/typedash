@@ -16,6 +16,9 @@ const editor = (state = initialState, action) => {
     case Types.SET_PASSAGE:
       return state.set('passage', action.payload)
 
+    case Types.RESET_PASSAGE:
+      return state.set('passage', '')
+
     default:
       return state
   }

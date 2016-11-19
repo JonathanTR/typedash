@@ -3,6 +3,7 @@ import ReactDOM               from 'react-dom';
 import {bindActionCreators}   from 'redux';
 import {connect}              from 'react-redux';
 
+import Downloader             from '../../downloader';
 import accessors              from '../accessors';
 import actions                from '../actions';
 import styles                 from './styles';
@@ -15,6 +16,7 @@ function mapStateToProps (state) {
     sessionLength: accessors.getSessionLength(state),
     wordCountGoal: accessors.getWordCountGoal(state),
     fadeDuration:  editorAccessors.getFadeDuration(state),
+    passage:       editorAccessors.getPassage(state),
   }
 }
 
@@ -24,6 +26,7 @@ function mapDispatchToProps (dispatch) {
     setSessionLength: actions.setSessionLength,
     setWordCountGoal: actions.setWordCountGoal,
     setFadeDuration:  editorActions.setFadeDuration,
+    resetPassage:     editorActions.resetPassage,
   }, dispatch);
 }
 
@@ -51,7 +54,13 @@ class ConfigurePanel extends Component {
   }
 
   render () {
-    const { sessionLength, isInSession, wordCountGoal, fadeDuration } = this.props
+    const { sessionLength,
+            isInSession,
+            wordCountGoal,
+            fadeDuration,
+            passage,
+            resetPassage,
+          } = this.props
     return (
       <form className={styles.configurePanel}>
         <div className={styles.configurePanel__option}>
@@ -105,10 +114,17 @@ class ConfigurePanel extends Component {
           )}
         </div>
 
-        <button className={styles.configurePanel__button}
-                onClick={this.handleClickStart.bind(this)}>
-          START
-        </button>
+        {passage.length == 0 ?
+          <button className={styles.configurePanel__button}
+                  onClick={this.handleClickStart.bind(this)}>
+            START
+          </button>
+        :
+          <div>
+            <Downloader fileContents={passage}/>
+            <a href='#' onClick={resetPassage}>reset</a>
+          </div>
+        }
       </form>
     )
   }

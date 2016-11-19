@@ -13,5 +13,12 @@ export default {
       type: Types.SET_PASSAGE,
       payload: passage
     }
+  },
+
+  resetPassage() {
+    return {
+      type: Types.RESET_PASSAGE,
+      payload: null
+    }
   }
 };

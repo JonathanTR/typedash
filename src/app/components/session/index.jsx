@@ -77,7 +77,7 @@ class Session extends Component {
   render () {
     const { resetSession, wordcount } = this.state
     const { isEnabled, sessionLength, isInSession, wordCountGoal } = this.props
-    const targetHeight = isEnabled ? 3 : 40
+    const targetHeight = isEnabled ? 3 : 42
     const targetStyle = {height:  spring(targetHeight,  {stiffness: 300, damping: 30})}
     return(
       <div>
