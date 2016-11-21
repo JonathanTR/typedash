@@ -30596,8 +30596,8 @@
 	              onChange: _this2.handleTextChange.bind(_this2),
 	              onCut: _this2.handleCutCopy.bind(_this2),
 	              onCopy: _this2.handleCutCopy.bind(_this2),
-	              placeholder: isDecayable ? 'The session will begin when you start typing' : 'Choose a target word count, session length, and fade timer. Then press "Start"',
-	              style: { opacity: percent == 100 ? 1 : (100 - percent) * 0.01 },
+	              placeholder: isDecayable ? 'The session will begin when you start typing' : 'Choose a target word count, session length, and fade timer. Then press "Start."',
+	              style: { color: 'rgb(' + Math.round(255 / 100 * percent) + ',0,0)' },
 	              onKeyDown: _this2.handleKeyDown.bind(_this2),
 	              onKeyUp: _this2.startDecay.bind(_this2),
 	              value: _this2.props.passage
@@ -30706,7 +30706,7 @@
 
 
 	// module
-	exports.push([module.id, "._33_fFJQsHjpMf9WagKwwG8 {\n  border: 1px solid #d3d3d3;\n  box-sizing: border-box;\n  margin: 0 auto;\n}\n.wfgCMuwjPEJbicfk4hlDZ {\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Cormorant Garamond', serif;\n  font-size: 18px;\n  height: 65vh;\n  outline: none;\n  padding: 20px;\n  resize: none;\n  width: 100%;\n  vertical-align: top;\n}\n", ""]);
+	exports.push([module.id, "._33_fFJQsHjpMf9WagKwwG8 {\n  border: 1px solid #d3d3d3;\n  box-sizing: border-box;\n  margin: 0 auto;\n}\n.wfgCMuwjPEJbicfk4hlDZ {\n  border: none;\n  box-sizing: border-box;\n  font-family: 'Inconsolata', sans-serif;\n  font-size: 15px;\n  height: 65vh;\n  line-height: 1.4em;\n  outline: none;\n  padding: 20px;\n  resize: none;\n  width: 100%;\n  vertical-align: top;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
