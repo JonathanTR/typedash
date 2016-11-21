@@ -96,7 +96,7 @@ class Editor extends Component {
               onCut={this.handleCutCopy.bind(this)}
               onCopy={this.handleCutCopy.bind(this)}
               placeholder={isDecayable ? 'The session will begin when you start typing' : 'Choose a target word count, session length, and fade timer. Then press "Start."'}
-              style={{opacity: percent == 100 ? 1 : (100 - percent) * 0.01}}
+              style={{color: `rgb(${Math.round(255 / 100 * percent)},0,0)`}}
               onKeyDown={this.handleKeyDown.bind(this)}
               onKeyUp={this.startDecay.bind(this)}
               value={this.props.passage}
