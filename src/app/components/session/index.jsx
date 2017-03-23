@@ -77,13 +77,13 @@ class Session extends Component {
   render () {
     const { resetSession, wordcount } = this.state
     const { isEnabled, sessionLength, isInSession, wordCountGoal } = this.props
-    const targetHeight = isEnabled ? 3 : 42
+    const targetHeight = isEnabled ? 0 : 253
     const targetStyle = {height:  spring(targetHeight,  {stiffness: 300, damping: 30})}
     return(
       <div>
         <Motion style={targetStyle}>
           {(style) =>
-            <div style={{height: `${style.height}vh`, overflow: 'hidden'}}>
+            <div style={{height: `${style.height}px`, overflow: 'hidden'}}>
               <ConfigurePanel />
             </div>
           }
