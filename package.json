@@ -1,8 +1,17 @@
 {
+  "author": {
+    "name": "JTR",
+    "email": "jonathan.d.reilly@gmail.com"
+  },
   "name": "typedash",
   "version": "1.0.0",
   "description": "An app to get over writer's block.",
   "repository": "https://github.com/JonathanTR/typedash",
+  "keywords": [
+    "minimalist",
+    "typewriter",
+    "typedash"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "jest --watch",
@@ -12,7 +21,6 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "fetch-jsonp": "^1.0.0",
     "immutable": "^3.8.1",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
@@ -40,12 +48,5 @@
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },
-  "keywords": [
-    "minimal",
-    "react",
-    "webpack",
-    "babel"
-  ],
-  "author": "JTR",
   "license": "ISC"
 }
