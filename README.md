@@ -1,16 +1,8 @@
-### Why?
-I keep finding myself in this predicament: I want to spin up a small side project
-over the weekend. I want to use react + redux, I want to use ES6 syntax, and I want
-to include things nicely, but all the boilerplate repos out there have a bunch of
-shit included that I don't need, or that I'm not smart enough to understand that
-I need. I'll probably have another iteration with some niceties, but here's the
-barest of bones in my opinion.
+Typedash is a minimalist typewriter that forces you to write without overthinking. It gives you three options: a target word count, session length, and fade timer. If you reach your target word count or type until the end of your session, you'll see an option to download your work as a text file. If you slow down for longer than fade timer, you'll lose your work!
 
-`make run` will spin up a webpack-dev-server with hot module replacement. You'll
-see "Hello, World!" at `localhost:9898`. An input to change that text implements
-a very small reducer.
+Typedash is built and hosted on Github pages. To run locally it locally, just:
 
-### Setup
-1. `npm install`
-2. `make run`
-3. App will be available at `localhost:9898`
+1. `git clone git@github.com:JonathanTR/typedash.git && cd typedash`
+2. `npm install`
+3. `make run`
+4. the app will be available at `localhost:9898`!
