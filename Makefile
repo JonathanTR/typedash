@@ -3,5 +3,7 @@ run:
 
 publish:
 	npm run build
+	git checkout gh-pages && cp -rf ./build/* . && rm -rf ./build
 	git add . && git commit -m 'Latest build.' --allow-empty
-	git push origin `git subtree split --prefix build master`:gh-pages --force
+	git push origin gh-pages --force
+	git checkout master
