@@ -1,5 +1,13 @@
 var path = require('path');
 
+// index.html template
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: __dirname + '/src/index.html',
+  filename: 'index.html',
+  inject: 'body'
+});
+
 var webpackConfig = {
   entry: "src/index.js",
   output: {
@@ -22,6 +30,7 @@ var webpackConfig = {
       }
     ]
   },
+  plugins: [HTMLWebpackPluginConfig],
   resolve: {
     // For nice filetype resolution, ie import 'components/navbar'.
     extensions: ["", ".js", ".jsx", ".css", ".styl"],
