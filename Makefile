@@ -4,5 +4,4 @@ run:
 publish:
 	npm run build
 	git add . && git commit -m 'Latest build.' --allow-empty
-	git subtree push --prefix build origin gh-pages
-	rm build/bundle.js
+	git push origin `git subtree split --prefix build master`:gh-pages --force
