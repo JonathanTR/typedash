@@ -31508,7 +31508,7 @@
 
 
 	// module
-	exports.push([module.id, "._32d8Zq3FmokKIJdMY4FvBA {\n  box-shadow: 0px 1px 1px 1px rgba(51,51,51,0.2);\n  font-family: monospace;\n  font-size: 1.2em;\n  height: 50px;\n  line-height: 50px;\n}\n._3d-QDNfSH62jLftvJZBcLu {\n  margin: 0 auto;\n  width: 67%;\n}\n._3kfB26fRlulBgL5MTRFVpK {\n  color: #333;\n}\n._3Ka-OwCB01WazmbYwuO_uI {\n  color: #f00;\n}\n", ""]);
+	exports.push([module.id, "._32d8Zq3FmokKIJdMY4FvBA {\n  box-shadow: 0px 1px 1px 1px rgba(51,51,51,0.2);\n  font-family: monospace;\n  font-size: 1.2em;\n  height: 50px;\n  line-height: 50px;\n}\n._3d-QDNfSH62jLftvJZBcLu {\n  margin: 0 auto;\n  width: 67%;\n}\n._3kfB26fRlulBgL5MTRFVpK {\n  color: #333;\n  font-weight: bold;\n  font-style: italic;\n}\n._3Ka-OwCB01WazmbYwuO_uI {\n  color: #f00;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
