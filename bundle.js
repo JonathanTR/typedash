@@ -31553,7 +31553,7 @@
 
 
 	// module
-	exports.push([module.id, "._3C8Xxzw_sw0Vhi0P49OUI- {\n  height: 100vh;\n  margin: 0 auto;\n  padding-top: 1em;\n  width: 67%;\n}\n", ""]);
+	exports.push([module.id, "body {\n  margin: 0px;\n}\n._3C8Xxzw_sw0Vhi0P49OUI- {\n  height: 100vh;\n  margin: 0 auto;\n  padding-top: 1em;\n  width: 67%;\n}\n", ""]);
 
 	// exports
 	exports.locals = {
